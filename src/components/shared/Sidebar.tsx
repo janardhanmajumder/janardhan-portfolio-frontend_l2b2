@@ -20,12 +20,12 @@ const Sidebar = () => {
   return (
     <>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <div className="w-full md:hidden fixed top-0 left-0 z-10 py-2 px-3 flex justify-between items-center bg-[#2837c3e8] text-white">
+        <div className="w-full md:hidden fixed top-0 left-0 z-10 py-3 px-4 flex justify-between items-center bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/50 text-white shadow-lg">
           <SheetTrigger>
-            <RxHamburgerMenu size={26} />
+            <RxHamburgerMenu size={26} className="text-violet-400 hover:text-violet-300 transition-colors" />
           </SheetTrigger>
           <Link href={"/"}>
-            <div className="w-9 h-9 mx-auto rounded-full overflow-hidden object-center border-2 avatar border-gradient-to-t from-red-500 to-blue-600">
+            <div className="w-9 h-9 mx-auto rounded-full overflow-hidden object-center border-2 avatar border-violet-500 shadow-md shadow-violet-500/20">
               <Image
                 src={"https://i.ibb.co/DYMCF0N/IMG-20220710-130806-698.jpg"}
                 width={100}
@@ -38,12 +38,12 @@ const Sidebar = () => {
         </div>
         <SheetContent
           side={"left"}
-          className="w-[300px] h-screen overflow-y-auto pb-0"
+          className="w-[300px] h-screen overflow-y-auto pb-0 bg-zinc-950 border-r border-zinc-800/60 text-slate-100"
         >
           <SidebarContent />
         </SheetContent>
       </Sheet>
-      <div className="bg-slate-200/70 w-full max-w-64 lg:max-w-72 h-screen overflow-y-auto hidden md:block sticky top-0 left-0">
+      <div className="bg-zinc-950/60 backdrop-blur-md w-full max-w-64 lg:max-w-72 h-screen overflow-y-auto hidden md:block sticky top-0 left-0 border-r border-zinc-900/80 shadow-2xl">
         <SidebarContent />
       </div>
     </>

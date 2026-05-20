@@ -1,68 +1,189 @@
+"use client";
+
 import { sideRoutes } from "@/utils/routeConstants";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import SidebarEmail from "./SidebarEmail";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const SidebarContent = () => {
+  const pathname = usePathname();
+  const path = pathname.split("/")[1]?.slice(0, -1);
+  const [activeSection, setActiveSection] = useState<string>("home");
+
+  useEffect(() => {
+    const sections = [
+      "about",
+      "skills",
+      "experience",
+      "project",
+      "blog",
+      "contact",
+    ];
+
+    const observers = sections.map((id) => {
+      const el = document.getElementById(id);
+      return { id, el };
+    });
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-30% 0px -60% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions,
+    );
+
+    observers.forEach(({ el }) => {
+      if (el) observer.observe(el);
+    });
+
+    const handleScroll = () => {
+      if (path) {
+        setActiveSection(path);
+      } else if (window.scrollY < 100) {
+        setActiveSection("home");
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [pathname]);
+  useEffect(() => {
+    if (path) {
+      setActiveSection(path);
+    }else if (window.scrollY < 100) {
+      setActiveSection("home");
+    }
+  }, [pathname]);
+  
   return (
-    <div className="h-full flex flex-col justify-between">
+    <div className="h-full flex flex-col justify-between text-slate-200">
       <div className="px-5 text-center py-10">
-        <div className="w-36 h-36 mx-auto rounded-full overflow-hidden object-center border-8 avatar border-gradient-to-t from-red-500 to-blue-600">
-          <Image
-            src={"https://i.ibb.co/DYMCF0N/IMG-20220710-130806-698.jpg"}
-            width={1000}
-            height={1000}
-            className="size-[120%] object-cover"
-            alt="profile"
-          />
+        <div className="w-32 h-32 mx-auto rounded-full p-[3px] bg-gradient-to-tr from-violet-300 via-fuchsia-200 to-cyan-200 shadow-[0_0_30px_rgba(167,139,250,0.45)] transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(167,139,250,0.55)]">
+          <div className="w-full h-full rounded-full p-[2px] bg-zinc-950">
+            <div className="w-full h-full rounded-full p-[1.5px] bg-gradient-to-bl from-cyan-600 via-fuchsia-600 to-violet-600">
+              <div className="w-full h-full rounded-full overflow-hidden">
+                <Image
+                  src="/profile.png"
+                  width={500}
+                  height={500}
+                  className="w-full h-full object-cover"
+                  alt="profile"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <h3 className="text-xl font-bold mt-8 font-mono tracking-tight">
+        <h3 className="text-xl font-bold mt-6 font-heading tracking-tight text-white hover:text-violet-400 transition-colors">
           Janardhan Majumder
         </h3>
         <SidebarEmail />
-        <p className="text-[11px] uppercase leading-4 ">
-          <span className="text-green-600">Front-End</span>/
-          <span className="text-green-600">Backend</span> Developer in
-          Bangladesh{" "}
+        <p className="text-[11px] uppercase tracking-widest text-zinc-400 font-medium mt-1">
+          <span className="text-violet-400 font-semibold">Front-End</span> /{" "}
+          <span className="text-cyan-400 font-semibold">Back-End</span>{" "}
+          Developer
         </p>
-        <div className="mt-8 text-[13px] uppercase flex flex-col gap-4">
-          <Link href={sideRoutes[0].path} className="w-fit mx-auto group">
-            <span className=" px-1">{sideRoutes[0].name}</span>
-            <div className="w-0 group-hover:w-full mx-auto duration-300 h-[1.3px] bg-green-400 mt-1" />
+        <p className="text-[9px] uppercase tracking-widest text-zinc-500 mt-0.5">
+          Bangladesh
+        </p>
+
+        <div className="mt-10 text-[12px] uppercase tracking-widest flex flex-col gap-5 font-heading">
+          <Link
+            href={sideRoutes[0].path}
+            className={cn(
+              "w-fit mx-auto group relative py-1 px-2 transition-colors duration-300",
+              activeSection === "home"
+                ? "text-white font-semibold"
+                : "text-zinc-300 hover:text-white",
+            )}
+          >
+            <span className="relative z-10">{sideRoutes[0].name}</span>
+            <div
+              className={cn(
+                "absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-pink-500 to-fuchsia-500 transition-all duration-300",
+                activeSection === "home" ? "w-full" : "w-0 group-hover:w-full",
+              )}
+            />
           </Link>
           {sideRoutes[0].children.map((nav) => (
             <Link
               href={`/#${nav.name}`}
               key={nav.name}
-              className="w-fit mx-auto group"
+              className={cn(
+                "w-fit mx-auto group relative py-1 px-2 transition-colors duration-300",
+                activeSection === nav.name
+                  ? "text-white font-semibold"
+                  : "text-zinc-300 hover:text-white",
+              )}
             >
-              <span className="px-1">{nav.name}</span>
-              <div className="w-0 group-hover:w-full mx-auto duration-300 h-[1.3px] bg-green-400 mt-1" />
+              <span className="relative z-10">{nav.name}</span>
+              <div
+                className={cn(
+                  "absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-pink-500 to-fuchsia-500 transition-all duration-300",
+                  activeSection === nav.name
+                    ? "w-full"
+                    : "w-0 group-hover:w-full",
+                )}
+              />
             </Link>
           ))}
         </div>
       </div>
-      <div className="mt-8 border-t border-gray-200 text-center pt-3 pb-4">
-        <span className="text-xs">@ 2024 All rights reserved!!</span>
-        <nav className="text-2xl text-blue-500 flex justify-center mt-4 h-10">
-          <a href="https://github.com/subrotomojumder" target="blank">
-            <FaGithub className="hover:text-orange-400 hover:text-3xl mx-2 hover:mx-[5px]  hover:mt-[-3px]" />
+
+      <div className="mt-8 border-t border-zinc-800/80 text-center pt-5 pb-6 bg-zinc-950/40">
+        <span className="text-[10px] text-zinc-500 tracking-wider font-mono">
+          &copy; {new Date().getFullYear()} All rights reserved
+        </span>
+        <nav className="text-xl text-zinc-400 flex justify-center gap-4 mt-3">
+          <a
+            href="https://github.com/subrotomojumder"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white hover:scale-115 transition-all duration-300 p-1.5 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
+          >
+            <FaGithub />
           </a>
           <a
             href="https://www.linkedin.com/in/janardhan-majumder/"
-            target="blank"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-violet-400 hover:scale-115 transition-all duration-300 p-1.5 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
           >
-            <FaLinkedin className="hover:text-orange-400 hover:text-3xl mx-2 hover:mx-[5px] hover:mt-[-3px]" />
+            <FaLinkedin />
           </a>
-          <a href="https://web.facebook.com/subroto.mojumder.14" target="blank">
-            <FaFacebook className="hover:text-orange-400 hover:text-3xl mx-2 hover:mx-[5px] hover:mt-[-3px]" />
+          <a
+            href="https://web.facebook.com/subroto.mojumder.14"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-blue-400 hover:scale-115 transition-all duration-300 p-1.5 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
+          >
+            <FaFacebook />
           </a>
           <a
             href="https://www.instagram.com/subroto.mojumder.14/"
-            target="blank"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-pink-400 hover:scale-115 transition-all duration-300 p-1.5 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
           >
-            <FaInstagram className="hover:text-orange-400 hover:text-3xl mx-2 hover:mx-[5px] hover:mt-[-3px]" />
+            <FaInstagram />
           </a>
         </nav>
       </div>

@@ -10,28 +10,33 @@ const Projects = async () => {
   return (
     <div
       id="project"
-      className="min-h-screen flex flex-col justify-center py-32 px-4 md:px-16 space-y-16 relative"
-      style={{
-        background: `linear-gradient(90deg, rgba(255, 99, 71, 0.1), rgba(0, 0, 0, 0)), url(https://i.ibb.co/NsvqYx8/category-BG.jpg)`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-      }}
+      className="min-h-screen flex flex-col justify-center py-24 px-6 md:px-16 space-y-16 relative bg-[#09090b] overflow-hidden border-t border-zinc-900/60"
     >
+      {/* Dynamic glow spotlights */}
+      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-violet-600/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-cyan-600/5 rounded-full blur-[100px] -z-10" />
+
       <div className="space-y-3">
-        <p className="text-xs text-slate-400 font-mono uppercase">Projects</p>
+        <p className="text-[11px] text-violet-400 font-mono tracking-widest uppercase">Projects</p>
         <h5
-          className="text-lg md:text-xl font-medium font-serif text-slate-500"
+          className="text-2xl md:text-3xl font-bold font-heading text-white uppercase tracking-tight"
           data-aos="fade-up"
           data-aos-anchor-placement="bottom-center"
         >
           RECENT WORK
         </h5>
       </div>
+
       <ProjectContent projects={data} />
-      <div className="text-center">
+
+      <div className="text-center pt-6">
         <Link href={`projects`}>
-          <Button variant="link">See All...</Button>
+          <Button 
+            variant="outline"
+            className="rounded-full border-zinc-800 bg-zinc-950/80 hover:bg-zinc-900 text-zinc-300 hover:text-white px-8 py-5 border hover:border-zinc-700 transition-all duration-300"
+          >
+            See All Projects
+          </Button>
         </Link>
       </div>
     </div>

@@ -64,7 +64,7 @@ const Footer = () => {
       </div>
       <div className="bg-gray-500 w-[80%] h-[1px] mx-auto mt-10 mb-12" />
       <p className="text-gray-300 text-center text-xs lg:text-sm">
-        © 2024. Copyright reserved by Janardhan.
+        © {new Date().getFullYear()}. Copyright reserved by Janardhan.
       </p>
     </div>
   );

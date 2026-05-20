@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "../ui/button";
-import Lottie from "react-lottie";
 import {
   Carousel,
   CarouselContent,
@@ -14,21 +13,23 @@ import helloAnimation from "@/assets/lottie/hello1.json";
 import frontendAnimation from "@/assets/lottie/frontend.json";
 import { cn } from "@/lib/utils";
 import { Wave1 } from "../ui/TextWaveAni";
-import { IoDownloadOutline } from "react-icons/io5";
+import { IoDownloadOutline, IoMailOutline } from "react-icons/io5";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+
 const bannerData = [
   {
     heading1: "Hi!",
     heading2: "I'm Janardhan",
-    des: " Passionate web developer skilled in creating dynamic, user-friendly websites with innovative design and seamless functionality. Web Developer.",
+    des: "Passionate web developer skilled in creating dynamic, user-friendly websites with innovative design and seamless functionality. Web Developer.",
     bg: "https://i.ibb.co/WndYYCR/address.jpg",
     smBg: "https://i.ibb.co/3CF7wxP/woman1.jpg",
     animation: {
       loop: true,
       autoplay: true,
       animationData: helloAnimation,
-      rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice",
-      },
     },
   },
   {
@@ -41,9 +42,6 @@ const bannerData = [
       loop: true,
       autoplay: true,
       animationData: developerAnimation,
-      rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice",
-      },
     },
   },
   {
@@ -56,105 +54,159 @@ const bannerData = [
       loop: true,
       autoplay: true,
       animationData: frontendAnimation,
-      rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice",
-      },
     },
   },
 ];
+
 const Banner = () => {
   const [width, setWidth] = useState(0);
+  const [showLottie, setShowLottie] = useState(false);
+
   useEffect(() => {
     setWidth(document.documentElement.clientWidth);
+    const timer = setTimeout(() => {
+      setShowLottie(true);
+    }, 200);
+    return () => clearTimeout(timer);
   }, []);
+
   if (width === 0) {
     return (
-      <div className="h-screen max-h-[600px] flex justify-center items-center">
+      <div className="h-screen max-h-[600px] flex justify-center items-center bg-[#09090b]">
         <SquareLoading />
       </div>
     );
   }
+
   return (
-    <div>
+    <div className="relative overflow-hidden bg-[#09090b]">
+      {/* Background spotlights */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px] -z-10" />
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-cyan-600/10 rounded-full blur-[100px] -z-10" />
+
       <Carousel
         plugins={[
           Autoplay({
-            delay: 5000,
+            delay: 6000,
           }),
         ]}
         opts={{
           loop: true,
-          duration: 0,
+          duration: 40,
         }}
         className="relative"
       >
-        <CarouselContent className="">
+        <CarouselContent>
           {bannerData.map((item, index) => (
             <CarouselItem key={index}>
-              <div>
-                <div
-                  style={{
-                    background:
-                      width === 0
-                        ? ""
-                        : width > 768
-                        ? `linear-gradient(90deg, rgba(249, 250, 250, 100), rgba(249, 250, 250, 90), rgba(249, 250, 250, 0.90), rgba(249, 250, 250, 0.0), rgba(249, 250, 250, 0.0)), url(${item.bg})`
-                        : `linear-gradient(to bottom, rgba(135, 227, 208, 0.70), rgba(135, 227, 208, 0.78), rgba(249, 250, 250, 0.70), rgba(249, 250, 250, 0.20), rgba(249, 250, 250, 0.0)), url(${item.smBg})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                  className={`md:h-screen md:max-h-[600px] xl:max-h-[700px] flex flex-col md:justify-center bg-gradient-to-r from-white via-white to-transparent bg-no-repeat bg-cover`}
-                >
-                  <div className="px-4 md:px-16 pt-32 md:pt-0 pb-10 space-y-4 text-center md:text-left">
-                    <h1 className="text-3xl md:text-6xl font-semibold leading-tight lg:leading-snug font-serif">
+              <div
+                style={{
+                  background:
+                    width === 0
+                      ? ""
+                      : width > 768
+                      ? `linear-gradient(90deg, rgba(9, 9, 11, 0.98) 10%, rgba(9, 9, 11, 0.9) 30%, rgba(9, 9, 11, 0.75) 50%, rgba(9, 9, 11, 0.3) 80%, rgba(9, 9, 11, 0.1)), url(${item.bg})`
+                      : `linear-gradient(to bottom, rgba(9, 9, 11, 0.95), rgba(9, 9, 11, 0.8) 40%, rgba(9, 9, 11, 0.9) 70%, rgba(9, 9, 11, 0.98)), url(${item.smBg})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
+                className="md:h-screen md:max-h-[600px] xl:max-h-[700px] flex flex-col md:justify-center bg-no-repeat bg-cover relative min-h-[550px]"
+              >
+                <div className="px-6 md:px-16 pt-28 md:pt-0 pb-10 space-y-5 text-center md:text-left max-w-4xl">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="space-y-4"
+                  >
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight font-heading text-white">
                       {item.heading1}
                       <br />
-
-                      <Wave1 text={`${item.heading2}!`} />
+                      <div className="text-white mt-2 h-[45px] md:h-[70px]">
+                        <Wave1 text={`${item.heading2}!`} />
+                      </div>
                     </h1>
-                    <p className="max-w-[40ch] md:max-w-[50ch] mx-auto md:mx-0 text-slate-600 text-sm lg:text-base">
-                      {item.des}
-                    </p>
-                    <div
-                      className={cn("pt-6", {
-                        "pt-4": index === 2,
-                      })}
+                  </motion.div>
+
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="max-w-[40ch] md:max-w-[50ch] mx-auto md:mx-0 text-zinc-300 text-sm lg:text-base leading-relaxed"
+                  >
+                    {item.des}
+                  </motion.p>
+
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    className={cn("pt-4 flex flex-wrap gap-4 justify-center md:justify-start items-center", {
+                      "pt-2": index === 2,
+                    })}
+                  >
+                    <a
+                      href="https://drive.google.com/file/d/1rE8Bp_NvdhsbgDD2S-kCYeJt34nRN2Ro/view?usp=drive_link"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-block"
                     >
-                      <a
-                        href="https://drive.google.com/file/d/1rE8Bp_NvdhsbgDD2S-kCYeJt34nRN2Ro/view?usp=drive_link"
-                        target="blank"
+                      <Button
+                        variant={"outline"}
+                        size={"lg"}
+                        className="relative overflow-hidden group shadow-lg rounded-full border-zinc-700 bg-zinc-950/80 text-zinc-200 hover:text-white transition-all duration-300 hover:border-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] flex items-center gap-2 px-6 py-6"
                       >
-                        <Button
-                          variant={"outline"}
-                          size={"lg"}
-                          className="shadow-sm animate-bounce rounded-none border-gray-400 gap-2"
-                        >
-                          Download CV <IoDownloadOutline />
-                        </Button>
+                        Download CV
+                        <IoDownloadOutline className="text-lg group-hover:translate-y-0.5 transition-transform duration-300 text-violet-400 group-hover:text-violet-300" />
+                      </Button>
+                    </a>
+                    <a href="#contact" className="inline-block">
+                      <Button
+                        variant={"outline"}
+                        size={"lg"}
+                        className="relative overflow-hidden group shadow-lg rounded-full border-zinc-700 bg-zinc-950/80 text-zinc-200 hover:text-white transition-all duration-300 hover:border-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] flex items-center gap-2 px-6 py-6"
+                      >
+                        Contact Me
+                        <IoMailOutline className="text-lg group-hover:translate-y-0.5 transition-transform duration-300 text-violet-400 group-hover:text-violet-300" />
+                      </Button>
+                    </a>
+                    <div className="flex gap-4 items-center">
+                      <a
+                        href="https://github.com/subrotomojumder"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="p-3.5 rounded-full border border-zinc-700 bg-zinc-950/80 text-zinc-400 hover:text-white hover:border-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-300"
+                      >
+                        <FaGithub className="text-xl" />
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/janardhan-majumder/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="p-3.5 rounded-full border border-zinc-700 bg-zinc-950/80 text-zinc-400 hover:text-white hover:border-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-300"
+                      >
+                        <FaLinkedin className="text-xl" />
                       </a>
                     </div>
-                    <div
-                      className={cn("pt-2 md:hidden", {
-                        "pt-0 ": index === 2,
+                  </motion.div>
+
+                  {/* Lottie for mobile view */}
+                  {showLottie && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.8 }}
+                      transition={{ duration: 1, delay: 0.8 }}
+                      className={cn("pt-4 md:hidden max-w-[200px] mx-auto", {
+                        "pt-0": index === 2,
                       })}
                     >
-                      <div
-                        className={cn("", {
-                          "-my-14": index === 2,
-                        })}
-                      >
-                        <Lottie options={item.animation} />
+                      <div className={cn("pointer-events-none", { "-my-6": index === 2 })}>
+                        <Lottie animationData={item.animation.animationData} loop={item.animation.loop} />
                       </div>
-                    </div>
-                  </div>
+                    </motion.div>
+                  )}
                 </div>
-                {/* <div className={cn("hidden md:block", {
-                  "-my-14":
-                    index === 2,
-                })}>
-                  <Lottie options={item.animation} />
-                </div> */}
               </div>
             </CarouselItem>
           ))}

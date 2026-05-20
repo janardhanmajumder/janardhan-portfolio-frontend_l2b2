@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter as FontSans } from "next/font/google";
+import { Plus_Jakarta_Sans as FontSans, Outfit as FontHeading } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/lib/Provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+const fontHeading = FontHeading({
+  subsets: ["latin"],
+  variable: "--font-heading",
 });
 
 export const metadata: Metadata = {
@@ -21,11 +26,12 @@ export default function RootLayout({
 }>) {
   
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased max-w-7xl mx-auto",
-          fontSans.variable
+          fontSans.variable,
+          fontHeading.variable
         )}
       >
         <Providers>{children}</Providers>

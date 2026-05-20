@@ -1,15 +1,15 @@
 import Typewriter from "typewriter-effect";
-import "@/styles/textAnimation.module.css"
-
 
 export const Wave1 = ({ text }: { text: string }) => (
-  <div>
+  <div className="inline-block text-white">
     <Typewriter
       options={{
         strings: [text],
         autoStart: true,
         deleteSpeed: 200,
         loop: true,
+        wrapperClassName: "text-white",
+        cursorClassName: "text-white font-light"
       }}
     />
   </div>

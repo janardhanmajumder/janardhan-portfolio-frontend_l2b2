@@ -78,7 +78,7 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
           <h5 className="text-xl font-semibold text-sate-600">Technologies:</h5>
           <div className="flex flex-wrap gap-3">
             {project.technologies?.map((item: string, inx: number) => (
-              <Badge variant="outline" key={inx} className={"bg-green-100"}>
+              <Badge variant="outline" key={inx}>
                 {item}
               </Badge>
             ))}
