@@ -21,7 +21,14 @@ import {
   SiGrafana,
 } from "react-icons/si";
 import { VscTerminal } from "react-icons/vsc";
-import { TbApi, TbShieldLock, TbChartBar, TbCloudComputing, TbDatabaseCog, TbRobot } from "react-icons/tb";
+import {
+  TbApi,
+  TbShieldLock,
+  TbChartBar,
+  TbCloudComputing,
+  TbDatabaseCog,
+  TbRobot,
+} from "react-icons/tb";
 import { MdOutlineSchedule, MdOutlineSpeed } from "react-icons/md";
 import { LuWorkflow } from "react-icons/lu";
 
@@ -45,11 +52,23 @@ const roadmap = [
     label: "Production Backend",
     color: "fuchsia",
     items: [
-      { icon: <TbShieldLock className="text-green-400" />, name: "Auth System" },
+      {
+        icon: <TbShieldLock className="text-green-400" />,
+        name: "Auth System",
+      },
       { icon: <TbChartBar className="text-orange-400" />, name: "Logging" },
-      { icon: <MdOutlineSpeed className="text-cyan-400" />, name: "Rate Limiting" },
-      { icon: <MdOutlineSchedule className="text-yellow-400" />, name: "BullMQ" },
-      { icon: <MdOutlineSchedule className="text-violet-400" />, name: "Cron Jobs" },
+      {
+        icon: <MdOutlineSpeed className="text-cyan-400" />,
+        name: "Rate Limiting",
+      },
+      {
+        icon: <MdOutlineSchedule className="text-yellow-400" />,
+        name: "BullMQ",
+      },
+      {
+        icon: <MdOutlineSchedule className="text-violet-400" />,
+        name: "Cron Jobs",
+      },
     ],
   },
   {
@@ -67,8 +86,10 @@ const roadmap = [
 ];
 
 const phaseAccent: Record<string, string> = {
-  violet: "border-violet-500/40 shadow-violet-500/10 | text-violet-400 bg-violet-500/5 border-violet-500/30",
-  fuchsia: "border-fuchsia-500/40 shadow-fuchsia-500/10 | text-fuchsia-400 bg-fuchsia-500/5 border-fuchsia-500/30",
+  violet:
+    "border-violet-500/40 shadow-violet-500/10 | text-violet-400 bg-violet-500/5 border-violet-500/30",
+  fuchsia:
+    "border-fuchsia-500/40 shadow-fuchsia-500/10 | text-fuchsia-400 bg-fuchsia-500/5 border-fuchsia-500/30",
   cyan: "border-cyan-500/40 shadow-cyan-500/10 | text-cyan-400 bg-cyan-500/5 border-cyan-500/30",
 };
 
@@ -76,19 +97,71 @@ const phaseAccent: Record<string, string> = {
 // Removed: PostgreSQL, Prisma, Redis, Docker, Linux, AWS, GitHub Actions, Grafana
 // (all appear in the roadmap cards)
 const tools = [
-  { icon: <SiVscodium className="text-blue-400" />,    label: "VS Code",          category: "Editor" },
-  { icon: <SiFigma className="text-pink-400" />,       label: "Figma",            category: "Design" },
-  { icon: <SiPostman className="text-orange-400" />,   label: "Postman",          category: "API Testing" },
-  { icon: <SiMongodb className="text-green-400" />,    label: "MongoDB Compass",  category: "Database" },
-  { icon: <SiGithub className="text-zinc-300" />,      label: "GitHub",           category: "Version Control" },
-  { icon: <SiVercel className="text-white" />,         label: "Vercel",           category: "Deployment" },
-  { icon: <SiGit className="text-orange-500" />,       label: "Git CLI",          category: "Version Control" },
-  { icon: <VscTerminal className="text-cyan-400" />,   label: "SSH",              category: "DevOps" },
-  { icon: <TbApi className="text-emerald-400" />,      label: "REST / GraphQL",   category: "API" },
-  { icon: <TbDatabaseCog className="text-blue-300" />, label: "pgAdmin",          category: "Database GUI" },
-  { icon: <TbRobot className="text-fuchsia-400" />,    label: "AI Agent",         category: "AI" },
-  { icon: <SiAnthropic className="text-violet-400" />, label: "Claude AI",        category: "AI" },
-  { icon: <SiOpenai className="text-emerald-400" />,   label: "ChatGPT",          category: "AI" },
+  {
+    icon: <SiVscodium className="text-blue-400" />,
+    label: "VS Code",
+    category: "Editor",
+  },
+  {
+    icon: <SiFigma className="text-pink-400" />,
+    label: "Figma",
+    category: "Design",
+  },
+  {
+    icon: <SiPostman className="text-orange-400" />,
+    label: "Postman",
+    category: "API Testing",
+  },
+  {
+    icon: <SiMongodb className="text-green-400" />,
+    label: "MongoDB Compass",
+    category: "Database",
+  },
+  {
+    icon: <SiGithub className="text-zinc-300" />,
+    label: "GitHub",
+    category: "Version Control",
+  },
+  {
+    icon: <SiVercel className="text-white" />,
+    label: "Vercel",
+    category: "Deployment",
+  },
+  {
+    icon: <SiGit className="text-orange-500" />,
+    label: "Git CLI",
+    category: "Version Control",
+  },
+  {
+    icon: <VscTerminal className="text-cyan-400" />,
+    label: "SSH",
+    category: "DevOps",
+  },
+  {
+    icon: <TbApi className="text-emerald-400" />,
+    label: "REST / GraphQL",
+    category: "API",
+  },
+  {
+    icon: <TbDatabaseCog className="text-blue-300" />,
+    label: "pgAdmin",
+    category: "Database GUI",
+  },
+  {
+    icon: <TbRobot className="text-fuchsia-400" />,
+    label: "AI Agent",
+    category: "AI",
+  },
+  {
+    icon: <SiAnthropic className="text-violet-400" />,
+    label: "Claude AI",
+    category: "AI",
+  },
+  {
+    icon: <SiOpenai className="text-emerald-400" />,
+    label: "ChatGPT",
+    category: "AI",
+  },
 ];
 
 const Skills = async () => {
@@ -191,7 +264,9 @@ const Skills = async () => {
                   className={`rounded-2xl border bg-zinc-900/30 backdrop-blur-md p-5 space-y-4 hover:shadow-lg transition-all duration-300 ${cardAccent}`}
                 >
                   <div className="space-y-1">
-                    <span className={`text-[10px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 rounded border ${badgeAccent}`}>
+                    <span
+                      className={`text-[10px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 rounded border ${badgeAccent}`}
+                    >
                       {phase}
                     </span>
                     <h4 className="text-base font-bold font-heading text-white mt-2">
@@ -201,7 +276,10 @@ const Skills = async () => {
 
                   <ul className="space-y-2.5">
                     {items.map(({ icon, name }) => (
-                      <li key={name} className="flex items-center gap-2.5 text-sm text-zinc-300 group">
+                      <li
+                        key={name}
+                        className="flex items-center gap-2.5 text-sm text-zinc-300 group"
+                      >
                         <span className="text-base shrink-0">{icon}</span>
                         <span className="group-hover:text-white transition-colors font-medium">
                           {name}

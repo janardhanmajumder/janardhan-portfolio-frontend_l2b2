@@ -1,10 +1,9 @@
 import { TBlog } from "@/types/blog.type";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { CalendarDays, MessageSquare, Tag } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type TBlogDetailsProps = {
   params: {
@@ -24,7 +23,6 @@ const BlogDetails = async ({ params }: TBlogDetailsProps) => {
     next: { revalidate: 30 },
   });
   const { data: blog }: { data: TBlog } = await res.json();
-  console.log(blog);
   return (
     <div className="min-h-screen flex flex-col pt-16 md:pt-12 pb-32 relative">
       {/* Hero Image */}

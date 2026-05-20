@@ -5,7 +5,8 @@ const SidebarEmail = () => {
   return (
     <p
       onClick={() => navigator.clipboard.writeText(email)}
-      className="mt-0.5 mb-4 text-xs text-slate-600 hover:text-blue-800 font-semibold tracking-tighter cursor-pointer "
+      title="Click to copy email"
+      className="mt-0.5 mb-4 text-xs text-zinc-400 hover:text-violet-400 font-mono tracking-tight cursor-pointer transition-colors duration-200"
     >
       {email}
     </p>

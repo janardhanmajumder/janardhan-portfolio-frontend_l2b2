@@ -30,7 +30,7 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
       //   backgroundAttachment: "fixed",
       // }}
     >
-      {project.images.length && (
+      {project?.images?.length && (
         <ProjectDetailsImage
           images={project.images}
           className="px-5 md:px-10"
@@ -45,10 +45,6 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
             </h5>
             <div className="h-3.5 w-0.5 bg-gray-400" />
             <Rating rate={4} size={24} />
-            <div className="h-3.5 w-0.5 bg-gray-400" />
-            <span className="text-sm text-green-500 whitespace-nowrap">
-              (43 Reviews)
-            </span>
           </div>
         </div>
         <div className="h-[1.5px] bg-gray-200" />
@@ -75,7 +71,7 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
           ))}
         </ul>
         <div className="space-y-4">
-          <h5 className="text-xl font-semibold text-sate-600">Technologies:</h5>
+          <h5 className="text-xl font-semibold text-slate-600">Technologies:</h5>
           <div className="flex flex-wrap gap-3">
             {project.technologies?.map((item: string, inx: number) => (
               <Badge variant="outline" key={inx}>
@@ -95,25 +91,11 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
           <div className="flex justify-start gap-3">
             <TimerReset />
             <span>
-              Updated date at: {new Date(project.createdAt).toDateString()}
+              Updated date at: {new Date(project.updatedAt ?? project.createdAt).toDateString()}
             </span>
           </div>
         </div>
-        <div className="pt-12">
-          <p className="text-sm font-medium text-slate-600">
-            DevConnect is a dynamic collaboration platform for developers,
-            crafted using the MERN stack (MongoDB, Express, React, Node.js). It
-            allows users to create and join projects, share code snippets, and
-            manage tasks collaboratively. Features include real-time messaging,
-            project boards, issue tracking, and version control integration.
-            Users can set up profiles, showcase their skills, and connect with
-            other developers. DevConnect fosters a community-driven environment,
-            supporting both individual and team projects. With its intuitive and
-            responsive design, the platform enhances productivity and networking
-            for developers, making it an essential tool for any development
-            project.
-          </p>
-        </div>
+        <div className="pt-12" />
       </div>
     </div>
   );

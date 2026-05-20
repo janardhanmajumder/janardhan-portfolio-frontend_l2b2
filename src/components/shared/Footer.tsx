@@ -54,18 +54,6 @@ const Footer = () => {
       <div className="absolute bottom-0 right-1/4 w-[200px] h-[150px] bg-cyan-600/4 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-6 md:px-12 py-12 space-y-10">
-
-        {/* Top row — name + tagline */}
-        {/* <div className="text-center space-y-1">
-          <h3 className="text-lg font-bold font-heading text-white tracking-tight">
-            Janardhan Majumder
-          </h3>
-          <p className="text-[11px] font-mono tracking-widest text-zinc-500 uppercase">
-            <span className="text-violet-400">Front-End</span> /{" "}
-            <span className="text-cyan-400">Back-End</span> Developer
-          </p>
-        </div> */}
-
         {/* Divider */}
         <div className="h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
 
