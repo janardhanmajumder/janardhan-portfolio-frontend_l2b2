@@ -147,7 +147,7 @@ const Banner = () => {
                     })}
                   >
                     <a
-                      href="https://drive.google.com/file/d/1rE8Bp_NvdhsbgDD2S-kCYeJt34nRN2Ro/view?usp=drive_link"
+                      href="https://docs.google.com/document/d/1GVFQmxkYdflpjjkOeXIXWI7bDEtrwVyn/edit?usp=sharing&ouid=110884669252090278616&rtpof=true&sd=true"
                       target="_blank"
                       rel="noreferrer"
                       className="inline-block"

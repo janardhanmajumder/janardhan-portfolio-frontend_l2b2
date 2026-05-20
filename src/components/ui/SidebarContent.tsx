@@ -3,7 +3,7 @@
 import { sideRoutes } from "@/utils/routeConstants";
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import SidebarEmail from "./SidebarEmail";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -152,12 +152,12 @@ const SidebarContent = () => {
         <span className="text-[10px] text-zinc-500 tracking-wider font-mono">
           &copy; {new Date().getFullYear()} All rights reserved
         </span>
-        <nav className="text-xl text-zinc-400 flex justify-center gap-4 mt-3">
+        <nav className="text-zinc-400 flex justify-center gap-4 mt-3">
           <a
             href="https://github.com/subrotomojumder"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-white hover:scale-115 transition-all duration-300 p-1.5 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
+            className="w-8 h-8 flex items-center justify-center text-lg hover:text-white hover:scale-110 transition-all duration-300 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
           >
             <FaGithub />
           </a>
@@ -165,23 +165,23 @@ const SidebarContent = () => {
             href="https://www.linkedin.com/in/janardhan-majumder/"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-violet-400 hover:scale-115 transition-all duration-300 p-1.5 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
+            className="w-8 h-8 flex items-center justify-center text-lg hover:text-violet-400 hover:scale-110 transition-all duration-300 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
           >
             <FaLinkedin />
           </a>
           <a
-            href="https://web.facebook.com/subroto.mojumder.14"
+            href="https://codeforces.com/profile/janardhan03"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-blue-400 hover:scale-115 transition-all duration-300 p-1.5 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
+            className="w-8 h-8 flex items-center justify-center text-[11px] font-bold font-mono hover:text-red-400 hover:scale-110 transition-all duration-300 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(239,68,68,0.15)]"
           >
-            <FaFacebook />
+            CF
           </a>
           <a
             href="https://www.instagram.com/subroto.mojumder.14/"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-pink-400 hover:scale-115 transition-all duration-300 p-1.5 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
+            className="w-8 h-8 flex items-center justify-center text-lg hover:text-pink-400 hover:scale-110 transition-all duration-300 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(236,72,153,0.15)]"
           >
             <FaInstagram />
           </a>
