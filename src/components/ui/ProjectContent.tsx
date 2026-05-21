@@ -38,8 +38,7 @@ const ProjectContent = ({ projects }: { projects: TProject[] }) => {
 
       <TabsContent value={tab}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 mt-16 pb-10">
-          {projects
-            .filter((project) =>
+          {projects?.filter((project) =>
               tab === "all" ? true : project.projectType?.toLowerCase() === tab.toLowerCase()
             )
             .map((project, idx) => (

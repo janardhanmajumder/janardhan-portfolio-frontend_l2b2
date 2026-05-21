@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const SkillContent = ({ skills }: { skills: TSkill[] }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-      {skills.map((skill, index) => (
+      {skills?.map((skill, index) => (
         <div key={skill._id || index} className="space-y-2">
           <div className="flex justify-between items-center text-sm">
             <span className="font-semibold text-white tracking-wide font-heading">{skill.title}</span>

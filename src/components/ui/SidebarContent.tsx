@@ -77,7 +77,7 @@ const SidebarContent = () => {
   return (
     <div className="h-full flex flex-col justify-between text-slate-200">
       <div className="px-5 text-center py-10">
-        <div className="w-32 h-32 mx-auto rounded-full p-[3px] bg-gradient-to-tr from-violet-300 via-fuchsia-200 to-cyan-200 shadow-[0_0_30px_rgba(167,139,250,0.45)] transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(167,139,250,0.55)]">
+        <div className="w-32 h-32 mx-auto rounded-full p-[3px] bg-gradient-to-tr from-violet-300 via-fuchsia-200 to-cyan-200 shadow-[0_0_30px_rgba(167,139,250,0.45)] transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(167,139,250,0.55)] ai-ring-pulse">
           <div className="w-full h-full rounded-full p-[2px] bg-zinc-950">
             <div className="w-full h-full rounded-full p-[1.5px] bg-gradient-to-bl from-cyan-600 via-fuchsia-600 to-violet-600">
               <div className="w-full h-full rounded-full overflow-hidden">

@@ -24,7 +24,7 @@ const AllBlogs = async () => {
         </h5>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-24 ">
-        {blogs.map((blog: TBlog, index: number) => (
+        {blogs?.map((blog: TBlog, index: number) => (
           <Link href={`blogs/${blog._id}`} key={blog._id}>
             <div
               data-aos="fade-right"

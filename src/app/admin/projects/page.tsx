@@ -141,7 +141,7 @@ export default function AdminProjectsPage() {
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((proj) => (
+          {projects?.map((proj) => (
             <div
               key={proj._id}
               className="flex flex-col rounded-2xl border border-cborder/60 bg-white shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md hover:border-[#e65f2b]/20"

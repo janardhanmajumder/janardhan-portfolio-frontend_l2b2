@@ -36,7 +36,7 @@ const bannerData = [
     heading1: "Hi! I'm a",
     heading2: "Web Developer",
     des: "Proficient MERN stack developer specializing in building robust web applications with MongoDB, Express.js, React, and Node.js technologies.",
-    bg: "https://i.ibb.co/6P6tsbc/web-development.jpg",
+    bg: "https://i.ibb.co.com/nM7fSsXT/Gemini-Generated-Image-1jkepg1jkepg1jke.png",
     smBg: "https://i.ibb.co/3CF7wxP/woman1.jpg",
     animation: {
       loop: true,
@@ -120,7 +120,8 @@ const Banner = () => {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="space-y-4"
                   >
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight font-heading text-white">
+                    {/* AI typing badge */}
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight font-heading text-white ai-glow-text ai-flicker">
                       {item.heading1}
                       <br />
                       <div className="text-white mt-2 h-[45px] md:h-[70px]">

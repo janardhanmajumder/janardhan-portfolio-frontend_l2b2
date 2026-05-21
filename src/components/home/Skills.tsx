@@ -31,6 +31,7 @@ import {
 } from "react-icons/tb";
 import { MdOutlineSchedule, MdOutlineSpeed } from "react-icons/md";
 import { LuWorkflow } from "react-icons/lu";
+import AITypingBadge from "../ui/AITypingBadge";
 
 // ─── Roadmap data ────────────────────────────────────────────────────────────
 const roadmap = [
@@ -196,6 +197,9 @@ const Skills = async () => {
         >
           MY SKILLS
         </h5>
+        <div className="">
+          <AITypingBadge />
+        </div>
       </div>
 
       <div className="space-y-10 px-6 md:px-16">

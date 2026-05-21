@@ -11,7 +11,7 @@ const WorkExperience = async () => {
 
   // Deduplicate experiences by ID or company name to resolve duplicate rendering bug
   const uniqueData = Array.from(
-    new Map(data.map((item: TExperience) => [item._id || `${item.companyName}-${item.designation}`, item])).values()
+    new Map(data?.map((item: TExperience) => [item._id || `${item.companyName}-${item.designation}`, item])).values()
   ) as TExperience[];
 
   return (
@@ -22,7 +22,10 @@ const WorkExperience = async () => {
       <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-violet-600/5 rounded-full blur-[120px] -z-10" />
 
       <div className="space-y-3">
-        <p className="text-[11px] text-violet-400 font-mono tracking-widest uppercase">EXPERIENCE</p>
+        <p className="text-[11px] text-violet-400 font-mono tracking-widest uppercase flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-violet-400 ai-ring-pulse" />
+          EXPERIENCE
+        </p>
         <h5
           className="text-2xl md:text-3xl font-bold font-heading text-white uppercase tracking-tight"
           data-aos="fade-up"
