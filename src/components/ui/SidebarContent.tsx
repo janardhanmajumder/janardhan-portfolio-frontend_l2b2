@@ -19,6 +19,7 @@ const SidebarContent = () => {
       "about",
       "skills",
       "experience",
+      "training",
       "project",
       "blog",
       "contact",

@@ -5,6 +5,7 @@ import Contact from "@/components/home/Contact";
 import Projects from "@/components/home/Projects";
 import Skills from "@/components/home/Skills";
 import Thanks from "@/components/home/Thanks";
+import Training from "@/components/home/Training";
 import WorkExperience from "@/components/home/WorkExperience";
 import GSAPReveal from "@/components/ui/GSAPReveal";
 
@@ -36,6 +37,12 @@ export default function Home() {
 
       <GSAPReveal variant="fadeLeft" start="top 90%">
         <WorkExperience />
+      </GSAPReveal>
+
+      <AIDivider />
+
+      <GSAPReveal variant="scaleIn" start="top 90%">
+        <Training />
       </GSAPReveal>
 
       <AIDivider />

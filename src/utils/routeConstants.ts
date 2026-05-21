@@ -13,6 +13,9 @@ export const sideRoutes = [
         name: "experience",
       },
       {
+        name: "training",
+      },
+      {
         name: "project",
       },
       {

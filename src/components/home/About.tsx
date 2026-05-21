@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import AIStatCard from "../ui/AIStatCard";
 
 const About = () => {
-  const topStatus = [
+  const topStatus: Array<{ content: number; suffix: string; status: string; color: "violet" | "cyan" | "fuchsia" }> = [
     { content: 50, suffix: "+", status: "Projects Completed", color: "violet" },
     { content: 3,  suffix: " yrs+", status: "Experience",         color: "cyan" },
     { content: 25, suffix: "+", status: "Technologies",           color: "fuchsia" },
