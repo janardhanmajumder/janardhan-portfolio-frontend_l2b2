@@ -3,7 +3,7 @@ import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const socials = [
   {
-    href: "https://github.com/subrotomojumder",
+    href: "https://github.com/janardhanmajumder",
     label: "GitHub",
     icon: <FaGithub />,
     hover: "hover:text-white hover:shadow-[0_0_12px_rgba(255,255,255,0.15)]",

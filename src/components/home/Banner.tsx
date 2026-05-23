@@ -174,7 +174,7 @@ const Banner = () => {
                     </a>
                     <div className="flex gap-4 items-center">
                       <a
-                        href="https://github.com/subrotomojumder"
+                        href="https://github.com/janardhanmajumder"
                         target="_blank"
                         rel="noreferrer"
                         className="p-3.5 rounded-full border border-zinc-700 bg-zinc-950/80 text-zinc-400 hover:text-white hover:border-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-300"

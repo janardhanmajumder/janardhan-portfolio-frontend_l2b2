@@ -155,7 +155,7 @@ const SidebarContent = () => {
         </span>
         <nav className="text-zinc-400 flex justify-center gap-4 mt-3">
           <a
-            href="https://github.com/subrotomojumder"
+            href="https://github.com/janardhanmajumder"
             target="_blank"
             rel="noreferrer"
             className="w-8 h-8 flex items-center justify-center text-lg hover:text-white hover:scale-110 transition-all duration-300 bg-zinc-900 rounded-lg border border-zinc-800 hover:border-zinc-700 shadow-sm hover:shadow-[0_0_10px_rgba(139,92,246,0.15)]"
