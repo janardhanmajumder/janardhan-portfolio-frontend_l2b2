@@ -3,11 +3,13 @@ import { MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import config from "@/config";
 
 const Blogs = async () => {
-  const res = await fetch(`${process.env.SERVER_URL}/blogs?limit=6`, {
+  const res = await fetch(`${config.serverUrl}/blogs?limit=6`, {
     next: { revalidate: 30 },
   });
+  console.log({ blogsRes: res });
   const { data: blogs } = await res.json();
   return (
     <div

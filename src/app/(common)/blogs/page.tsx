@@ -2,9 +2,10 @@ import { TBlog } from "@/types/blog.type";
 import { MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import config from "@/config";
 
 const AllBlogs = async () => {
-  const res = await fetch(`${process.env.SERVER_URL}/blogs`, {
+  const res = await fetch(`${config.serverUrl}/blogs`, {
     next: { revalidate: 30 },
   });
   const { data: blogs } = await res.json();

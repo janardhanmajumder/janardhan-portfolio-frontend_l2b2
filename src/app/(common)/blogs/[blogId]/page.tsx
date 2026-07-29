@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import config from "@/config";
 
 type TBlogDetailsProps = {
   params: {
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 
 const BlogDetails = async ({ params }: TBlogDetailsProps) => {
   const { blogId } = params;
-  const res = await fetch(`${process.env.SERVER_URL}/blogs/${blogId}`, {
+  const res = await fetch(`${config.serverUrl}/blogs/${blogId}`, {
     next: { revalidate: 30 },
   });
   const { data: blog }: { data: TBlog } = await res.json();
@@ -123,7 +124,7 @@ const BlogDetails = async ({ params }: TBlogDetailsProps) => {
 };
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.SERVER_URL}/blogs`);
+  const res = await fetch(`${config.serverUrl}/blogs`);
   const { data } = await res.json();
   return data.map((blog: TBlog) => ({
     blogId: blog._id,

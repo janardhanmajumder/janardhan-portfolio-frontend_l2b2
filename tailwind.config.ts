@@ -58,6 +58,11 @@ const config = withMT({
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        brand: "#f4f4f5",
+        "light-brand": "#e4e4e7",
+        owngray: "#a1a1aa",
+        playground: "#18181b",
+        cborder: "#27272a",
       },
       borderRadius: {
         lg: "var(--radius)",

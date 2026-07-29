@@ -2,9 +2,10 @@ import { TExperience } from "@/types/experience.type";
 import React from "react";
 import { PiPenThin } from "react-icons/pi";
 import { cn } from "@/lib/utils";
+import config from "@/config";
 
 const WorkExperience = async () => {
-  const res = await fetch(`${process.env.SERVER_URL}/experiences`, {
+  const res = await fetch(`${config.serverUrl}/experiences?sort=createdAt`, {
     next: { revalidate: 30 },
   });
   const { data } = await res.json();

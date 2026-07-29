@@ -27,7 +27,7 @@ const Sidebar = () => {
           <Link href={"/"}>
             <div className="w-9 h-9 mx-auto rounded-full overflow-hidden object-center border-2 avatar border-violet-500 shadow-md shadow-violet-500/20">
               <Image
-                src={"https://i.ibb.co/DYMCF0N/IMG-20220710-130806-698.jpg"}
+                src={"/profile.png"}
                 width={100}
                 height={100}
                 className="size-[130%] object-cover"

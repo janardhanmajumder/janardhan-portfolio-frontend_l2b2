@@ -1,8 +1,9 @@
 import ProjectContent from "@/components/ui/ProjectContent";
 import React from "react";
+import config from "@/config";
 
 const AllProjects = async () => {
-  const res = await fetch(`${process.env.SERVER_URL}/projects`, {
+  const res = await fetch(`${config.serverUrl}/projects`, {
     next: { revalidate: 30 },
   });
   const { data } = await res.json();

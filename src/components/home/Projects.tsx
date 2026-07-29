@@ -1,9 +1,10 @@
 import Link from "next/link";
 import ProjectContent from "../ui/ProjectContent";
 import { Button } from "../ui/button";
+import config from "@/config";
 
 const Projects = async () => {
-  const res = await fetch(`${process.env.SERVER_URL}/projects?limit=6`, {
+  const res = await fetch(`${config.serverUrl}/projects?limit=6`, {
     next: { revalidate: 30 },
   });
   const { data } = await res.json();

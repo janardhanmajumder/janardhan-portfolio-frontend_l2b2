@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import ProjectDetailsImage from "@/components/ui/projectDetails/projectDetailsImage";
 import { Droplets, TimerReset } from "lucide-react";
 import { Metadata } from "next";
+import config from "@/config";
 
 type TProjectDetailsProps = {
   params: {
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 
 const ProductDetails = async ({ params }: TProjectDetailsProps) => {
   const { projectId } = params;
-  const res = await fetch(`${process.env.SERVER_URL}/projects/${projectId}`);
+  const res = await fetch(`${config.serverUrl}/projects/${projectId}`);
   const { data: project } = await res.json();
   return (
     <div
@@ -102,7 +103,7 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
 };
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.SERVER_URL}/projects`);
+  const res = await fetch(`${config.serverUrl}/projects`);
   const { data } = await res.json();
   return data.map((project: any) => ({
     projectId: project._id,

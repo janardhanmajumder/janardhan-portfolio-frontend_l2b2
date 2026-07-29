@@ -1,16 +1,18 @@
 import Image from "next/image";
+import nextjsLogo from "@/assets/skills/nextjs.png";
+import reactLogo from "@/assets/skills/react.jpg";
+import nodejsLogo from "@/assets/skills/nodejs.png";
 import SkillContent from "../ui/SkillContent";
+import config from "@/config";
 import {
   SiVscodium,
   SiFigma,
   SiPostman,
   SiMongodb,
   SiGithub,
-  SiAmazon,
   SiVercel,
   SiGit,
   SiLinux,
-  SiOpenai,
   SiAnthropic,
   SiDocker,
   SiRedis,
@@ -20,6 +22,7 @@ import {
   SiGithubactions,
   SiGrafana,
 } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 import { VscTerminal } from "react-icons/vsc";
 import {
   TbApi,
@@ -28,6 +31,7 @@ import {
   TbCloudComputing,
   TbDatabaseCog,
   TbRobot,
+  TbBrandOpenai,
 } from "react-icons/tb";
 import { MdOutlineSchedule, MdOutlineSpeed } from "react-icons/md";
 import { LuWorkflow } from "react-icons/lu";
@@ -80,7 +84,7 @@ const roadmap = [
       { icon: <LuWorkflow className="text-blue-400" />, name: "System Design" },
       { icon: <TbCloudComputing className="text-sky-400" />, name: "Scaling" },
       { icon: <SiGithubactions className="text-zinc-300" />, name: "CI/CD" },
-      { icon: <SiAmazon className="text-yellow-400" />, name: "AWS" },
+      { icon: <FaAws className="text-yellow-400" />, name: "AWS" },
       { icon: <SiGrafana className="text-orange-400" />, name: "Monitoring" },
     ],
   },
@@ -159,22 +163,22 @@ const tools = [
     category: "AI",
   },
   {
-    icon: <SiOpenai className="text-emerald-400" />,
+    icon: <TbBrandOpenai className="text-emerald-400" />,
     label: "ChatGPT",
     category: "AI",
   },
 ];
 
 const Skills = async () => {
-  const res = await fetch(`${process.env.SERVER_URL}/skills?sort=createdAt`, {
+  const res = await fetch(`${config.serverUrl}/skills?sort=createdAt`, {
     next: { revalidate: 30 },
   });
   const { data } = await res.json();
-
+  // console.log({ skillsData: data });
   const logos = [
-    { image: require("@/assets/skills/nextjs.png") },
-    { image: require("@/assets/skills/react.jpg") },
-    { image: require("@/assets/skills/nodejs.png") },
+    { image: nextjsLogo },
+    { image: reactLogo },
+    { image: nodejsLogo },
   ];
 
   return (
@@ -300,7 +304,7 @@ const Skills = async () => {
 
       {/* Logo strip */}
       <div className="w-full flex justify-evenly gap-6 py-8 mt-10 px-4 md:px-16 border-y border-zinc-900 bg-zinc-950/60 backdrop-blur-md">
-        {logos.map((logo: { image: string }, i) => (
+        {logos.map((logo, i) => (
           <div
             key={i}
             className="w-16 md:w-20 h-16 md:h-20 overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800/80 p-2.5 hover:border-violet-500/40 hover:shadow-[0_0_20px_rgba(139,92,246,0.2)] transition-all duration-300 flex justify-center items-center"
