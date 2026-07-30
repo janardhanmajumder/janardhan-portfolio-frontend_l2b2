@@ -9,7 +9,7 @@ const Blogs = async () => {
   const res = await fetch(`${config.serverUrl}/blogs?limit=6`, {
     next: { revalidate: 30 },
   });
-  console.log({ blogsRes: res });
+  // console.log({ blogsRes: res });
   const { data: blogs } = await res.json();
   return (
     <div

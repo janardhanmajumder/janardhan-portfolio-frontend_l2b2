@@ -65,7 +65,7 @@ const About = () => {
             <span className="text-violet-400">Next.js · React.js · Tailwind CSS</span>
             <br />
             Backend:{" "}
-            <span className="text-cyan-400">NestJS · Express.js · PostgreSQL · MongoDB</span>
+            <span className="text-cyan-400">Express.JS · Nest.JS · PostgreSQL · MongoDB</span>
             <br />
             DevOps:{" "}
             <span className="text-fuchsia-400">Docker · AWS · GitHub Actions · Linux</span>

@@ -70,11 +70,11 @@ const SidebarContent = () => {
   useEffect(() => {
     if (path) {
       setActiveSection(path);
-    }else if (window.scrollY < 100) {
+    } else if (window.scrollY < 100) {
       setActiveSection("home");
     }
   }, [pathname]);
-  
+
   return (
     <div className="h-full flex flex-col justify-between text-slate-200">
       <div className="px-5 text-center py-10">
@@ -97,14 +97,21 @@ const SidebarContent = () => {
           Janardhan Majumder
         </h3>
         <SidebarEmail />
-        <p className="text-[11px] uppercase tracking-widest text-zinc-400 font-medium mt-1">
-          <span className="text-violet-400 font-semibold">Front-End</span> /{" "}
-          <span className="text-cyan-400 font-semibold">Back-End</span>{" "}
-          Developer
-        </p>
-        <p className="text-[9px] uppercase tracking-widest text-zinc-500 mt-0.5">
+        <div className="mt-2 flex flex-col items-center gap-1">
+          {/* <p className="text-[11px] uppercase tracking-[0.22em] font-mono font-bold">
+            <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+              Full Stack Developer
+            </span>
+          </p> */}
+          <p className="text-[10px] uppercase tracking-widest text-zinc-400 font-mono flex items-center justify-center gap-1">
+            <span className="text-zinc-300">Full Stack</span>
+            <span className="text-zinc-600">/</span>
+            <span className="text-cyan-400 font-semibold">Developer</span>
+          </p>
+        </div>
+        {/* <p className="text-[9px] uppercase tracking-widest text-zinc-500 mt-1">
           Bangladesh
-        </p>
+        </p> */}
 
         <div className="mt-10 text-[12px] uppercase tracking-widest flex flex-col gap-5 font-heading">
           <Link

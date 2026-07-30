@@ -203,9 +203,9 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }: SidebarProps) => {
           {/* ── User profile + logout ── */}
           <div className="shrink-0 border-t border-zinc-800/80 px-3 py-3">
             {/* User info row */}
-            <div className="mb-2 flex items-center gap-3 rounded-xl bg-zinc-900/60 px-3 py-2.5">
+            <div className="mb-2 flex items-center gap-3 rounded-xl border border-zinc-800/80 bg-zinc-900/90 px-3 py-2.5">
               <div className="relative h-8 w-8 shrink-0">
-                <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-violet-900/60 text-xs font-bold text-violet-300 ring-2 ring-zinc-800">
+                <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-violet-950/80 text-xs font-bold text-violet-300 ring-2 ring-violet-500/30">
                   {user?.image ? (
                     <img
                       src={user.image}
@@ -219,13 +219,13 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }: SidebarProps) => {
                     initials
                   )}
                 </div>
-                <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full border-2 border-zinc-950 bg-emerald-500" aria-hidden />
+                <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full border-2 border-zinc-950 bg-emerald-400" aria-hidden />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-xs font-semibold text-zinc-100">
+                <p className="truncate text-xs font-semibold text-white">
                   {user?.name ?? 'Administrator'}
                 </p>
-                <p className="truncate text-[10px] text-zinc-500">
+                <p className="truncate text-[10px] font-mono text-zinc-400">
                   {user?.email ?? 'admin@portfolio.dev'}
                 </p>
               </div>
@@ -235,11 +235,11 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }: SidebarProps) => {
             <button
               onClick={handleLogOut}
               type="button"
-              className="group flex w-full items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm text-zinc-500 transition-colors hover:bg-red-500/10 hover:text-red-400"
+              className="group flex w-full items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm text-zinc-300 transition-colors hover:bg-red-500/10 hover:text-red-400"
             >
               <FiLogOut
                 size={15}
-                className="shrink-0 text-red-500/70 transition-transform duration-200 group-hover:-translate-x-0.5 group-hover:text-red-400"
+                className="shrink-0 text-red-400 transition-transform duration-200 group-hover:-translate-x-0.5 group-hover:text-red-300"
               />
               <span className="font-medium">Logout</span>
             </button>
