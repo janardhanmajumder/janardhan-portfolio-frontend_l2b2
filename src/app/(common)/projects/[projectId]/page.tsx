@@ -5,6 +5,7 @@ import ProjectDetailsImage from "@/components/ui/projectDetails/projectDetailsIm
 import { Droplets, TimerReset } from "lucide-react";
 import { Metadata } from "next";
 import config from "@/config";
+import { notFound } from "next/navigation";
 
 type TProjectDetailsProps = {
   params: {
@@ -17,10 +18,18 @@ export const metadata: Metadata = {
     "Passionate web developer skilled in creating dynamic, user-friendly websites with innovative design and seamless functionality. Web Developer.",
 };
 
+// Allow on-demand rendering for IDs not pre-generated at build time
+export const dynamicParams = true;
+
 const ProductDetails = async ({ params }: TProjectDetailsProps) => {
   const { projectId } = params;
   const res = await fetch(`${config.serverUrl}/projects/${projectId}`);
+
+  if (!res.ok) notFound();
+
   const { data: project } = await res.json();
+
+  if (!project) notFound();
   return (
     <div
       className="min-h-screen flex flex-col justify-center pt-16 md:pt-12 pb-32 space-y-6 md:space-y-16 relative"
@@ -103,11 +112,16 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
 };
 
 export async function generateStaticParams() {
-  const res = await fetch(`${config.serverUrl}/projects`);
-  const { data } = await res.json();
-  return data.map((project: any) => ({
-    projectId: project._id,
-  }));
+  try {
+    const res = await fetch(`${config.serverUrl}/projects`);
+    if (!res.ok) return [];
+    const { data } = await res.json();
+    return (data ?? []).map((project: any) => ({
+      projectId: project._id,
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export default ProductDetails;

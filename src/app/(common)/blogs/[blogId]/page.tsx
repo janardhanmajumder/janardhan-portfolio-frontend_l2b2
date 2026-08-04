@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import config from "@/config";
+import { notFound } from "next/navigation";
 
 type TBlogDetailsProps = {
   params: {
@@ -18,12 +19,20 @@ export const metadata: Metadata = {
     "Passionate web developer skilled in creating dynamic, user-friendly websites with innovative design and seamless functionality.",
 };
 
+// Allow on-demand rendering for IDs not pre-generated at build time
+export const dynamicParams = true;
+
 const BlogDetails = async ({ params }: TBlogDetailsProps) => {
   const { blogId } = params;
   const res = await fetch(`${config.serverUrl}/blogs/${blogId}`, {
     next: { revalidate: 30 },
   });
+
+  if (!res.ok) notFound();
+
   const { data: blog }: { data: TBlog } = await res.json();
+
+  if (!blog) notFound();
   return (
     <div className="min-h-screen flex flex-col pt-16 md:pt-12 pb-32 relative">
       {/* Hero Image */}
@@ -124,11 +133,16 @@ const BlogDetails = async ({ params }: TBlogDetailsProps) => {
 };
 
 export async function generateStaticParams() {
-  const res = await fetch(`${config.serverUrl}/blogs`);
-  const { data } = await res.json();
-  return data.map((blog: TBlog) => ({
-    blogId: blog._id,
-  }));
+  try {
+    const res = await fetch(`${config.serverUrl}/blogs`);
+    if (!res.ok) return [];
+    const { data } = await res.json();
+    return (data ?? []).map((blog: TBlog) => ({
+      blogId: blog._id,
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export default BlogDetails;
