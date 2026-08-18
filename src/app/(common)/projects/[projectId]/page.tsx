@@ -8,21 +8,39 @@ import config from "@/config";
 import { notFound } from "next/navigation";
 
 type TProjectDetailsProps = {
-  params: {
-    [index: string]: unknown;
-  };
+  params: Promise<{
+    projectId: string;
+  }>;
 };
+
 export const metadata: Metadata = {
   title: "JANARDHAN | PROJECT",
   description:
     "Passionate web developer skilled in creating dynamic, user-friendly websites with innovative design and seamless functionality. Web Developer.",
 };
 
-// Allow on-demand rendering for IDs not pre-generated at build time
-export const dynamicParams = true;
+// REQUIRED FOR STATIC EXPORTS: Disable dynamic rendering at runtime
+export const dynamicParams = false;
+
+// Pre-render all project paths during build time
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(`${config.serverUrl}/projects`);
+    if (!res.ok) return [];
+    
+    const { data } = await res.json();
+    return (data ?? []).map((project: { _id: string }) => ({
+      projectId: String(project._id),
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params for projects:", error);
+    return [];
+  }
+}
 
 const ProductDetails = async ({ params }: TProjectDetailsProps) => {
-  const { projectId } = params;
+  const { projectId } = await params;
+
   const res = await fetch(`${config.serverUrl}/projects/${projectId}`);
 
   if (!res.ok) notFound();
@@ -30,16 +48,9 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
   const { data: project } = await res.json();
 
   if (!project) notFound();
+
   return (
-    <div
-      className="min-h-screen flex flex-col justify-center pt-16 md:pt-12 pb-32 space-y-6 md:space-y-16 relative"
-      //  style={{
-      //   background: `linear-gradient(90deg, rgba(255, 99, 71, 0.1), rgba(0, 0, 0, 0)), url(https://i.ibb.co/NsvqYx8/category-BG.jpg)`,
-      //   backgroundSize: "cover",
-      //   backgroundRepeat: "no-repeat",
-      //   backgroundAttachment: "fixed",
-      // }}
-    >
+    <div className="min-h-screen flex flex-col justify-center pt-16 md:pt-12 pb-32 space-y-6 md:space-y-16 relative">
       {project?.images?.length && (
         <ProjectDetailsImage
           images={project.images}
@@ -58,21 +69,21 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
           </div>
         </div>
         <div className="h-[1.5px] bg-gray-200" />
-        <div className="flex flex-wrap gap-4 items-center ">
-          {/* <span className="font-medium text-slate-600">Project Link :</span> */}
-          {Object.entries(project.links).map(
-            ([name, link], inx) =>
-              name !== "_id" && (
-                <a href={link as string} target="_blank" key={inx}>
-                  <Button
-                    variant="link"
-                    className="border capitalize hover:text-purple-600"
-                  >
-                    {name}
-                  </Button>
-                </a>
-              )
-          )}
+        <div className="flex flex-wrap gap-4 items-center">
+          {project.links &&
+            Object.entries(project.links).map(
+              ([name, link], inx) =>
+                name !== "_id" && (
+                  <a href={link as string} target="_blank" key={inx} rel="noreferrer">
+                    <Button
+                      variant="link"
+                      className="border capitalize hover:text-purple-600"
+                    >
+                      {name}
+                    </Button>
+                  </a>
+                )
+            )}
         </div>
         <p className="text-sm font-medium text-slate-600">{project.des}</p>
         <ul className="space-y-1 list-disc text-sm font-medium text-gray-700 pl-8">
@@ -101,7 +112,8 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
           <div className="flex justify-start gap-3">
             <TimerReset />
             <span>
-              Updated date at: {new Date(project.updatedAt ?? project.createdAt).toDateString()}
+              Updated date at:{" "}
+              {new Date(project.updatedAt ?? project.createdAt).toDateString()}
             </span>
           </div>
         </div>
@@ -110,18 +122,5 @@ const ProductDetails = async ({ params }: TProjectDetailsProps) => {
     </div>
   );
 };
-
-export async function generateStaticParams() {
-  try {
-    const res = await fetch(`${config.serverUrl}/projects`);
-    if (!res.ok) return [];
-    const { data } = await res.json();
-    return (data ?? []).map((project: any) => ({
-      projectId: project._id,
-    }));
-  } catch {
-    return [];
-  }
-}
 
 export default ProductDetails;

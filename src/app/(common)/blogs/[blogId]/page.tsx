@@ -8,10 +8,29 @@ import config from "@/config";
 import { notFound } from "next/navigation";
 
 type TBlogDetailsProps = {
-  params: {
-    [index: string]: unknown;
-  };
+  params: Promise<{
+    blogId: string;
+  }>;
 };
+
+// Required for Next.js static export (output: export)
+export const dynamicParams = false;
+
+// Generate static params at build time
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(`${config.serverUrl}/blogs`);
+    if (!res.ok) return [];
+    
+    const { data } = await res.json();
+    return (data ?? []).map((blog: TBlog) => ({
+      blogId: String(blog._id),
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params for blogs:", error);
+    return [];
+  }
+}
 
 export const metadata: Metadata = {
   title: "JANARDHAN | BLOG",
@@ -19,20 +38,17 @@ export const metadata: Metadata = {
     "Passionate web developer skilled in creating dynamic, user-friendly websites with innovative design and seamless functionality.",
 };
 
-// Allow on-demand rendering for IDs not pre-generated at build time
-export const dynamicParams = true;
-
 const BlogDetails = async ({ params }: TBlogDetailsProps) => {
-  const { blogId } = params;
-  const res = await fetch(`${config.serverUrl}/blogs/${blogId}`, {
-    next: { revalidate: 30 },
-  });
+  const { blogId } = await params;
+
+  const res = await fetch(`${config.serverUrl}/blogs/${blogId}`);
 
   if (!res.ok) notFound();
 
   const { data: blog }: { data: TBlog } = await res.json();
 
   if (!blog) notFound();
+
   return (
     <div className="min-h-screen flex flex-col pt-16 md:pt-12 pb-32 relative">
       {/* Hero Image */}
@@ -131,18 +147,5 @@ const BlogDetails = async ({ params }: TBlogDetailsProps) => {
     </div>
   );
 };
-
-export async function generateStaticParams() {
-  try {
-    const res = await fetch(`${config.serverUrl}/blogs`);
-    if (!res.ok) return [];
-    const { data } = await res.json();
-    return (data ?? []).map((blog: TBlog) => ({
-      blogId: blog._id,
-    }));
-  } catch {
-    return [];
-  }
-}
 
 export default BlogDetails;

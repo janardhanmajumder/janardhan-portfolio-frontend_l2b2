@@ -7,6 +7,7 @@ module.exports = {
         hostname: "**",
       },
     ],
+    unoptimized: true,
   },
   output: "export",
 };
