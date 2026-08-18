@@ -2,7 +2,7 @@ name: Deploy Next.js to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # Or your default branch
+    branches: ["main"]
   schedule:
     - cron: "0 0 * * *" # Daily automatic rebuild & deploy to GitHub Pages
   workflow_dispatch:
@@ -26,23 +26,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: ${{ hashFiles('package-lock.json') != '' && 'npm' || 'yarn' }}
+          node-version: "22"
+          cache: "npm"
 
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then npm ci;
-          elif [ -f yarn.lock ]; then yarn install --frozen-lockfile;
-          else npm install;
-          fi
+        run: npm ci
 
       - name: Build and Export
-        run: npm run build # NextJS extracts assets into the /out folder automatically
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SERVER_URL: ${{ secrets.NEXT_PUBLIC_SERVER_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out # Instructs GitHub to grab the extracted static folder
+          path: ./out
 
   deploy:
     environment:
