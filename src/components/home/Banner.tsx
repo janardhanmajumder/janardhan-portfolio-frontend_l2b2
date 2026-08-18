@@ -17,6 +17,7 @@ import { IoDownloadOutline, IoMailOutline } from "react-icons/io5";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import config from "@/config";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 const bannerData = [
@@ -61,6 +62,7 @@ const bannerData = [
 const Banner = () => {
   const [width, setWidth] = useState(0);
   const [showLottie, setShowLottie] = useState(false);
+  const cvUrl = config.cvUrl;
 
   useEffect(() => {
     setWidth(document.documentElement.clientWidth);
@@ -148,7 +150,7 @@ const Banner = () => {
                     })}
                   >
                     <a
-                      href="https://docs.google.com/document/d/1GVFQmxkYdflpjjkOeXIXWI7bDEtrwVyn/edit?usp=sharing&ouid=110884669252090278616&rtpof=true&sd=true"
+                      href={cvUrl}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-block"
